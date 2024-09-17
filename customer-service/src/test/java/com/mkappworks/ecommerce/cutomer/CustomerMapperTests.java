@@ -4,8 +4,7 @@ import com.mkappworks.ecommerce.customer.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CustomerMapperTests {
 
@@ -42,7 +41,7 @@ public class CustomerMapperTests {
     public void shouldReturnNullIfCustomerRequestIsNull() {
         var mappedCustomer = new CustomerMapper().toCustomer(null);
 
-        assertEquals(null, mappedCustomer);
+        assertNull(mappedCustomer);
     }
 
     @Test
@@ -69,6 +68,7 @@ public class CustomerMapperTests {
     @Test
     public void should_throw_null_pointer_exception_when_customer_is_null() {
         var exp = assertThrows(NullPointerException.class, () -> customerMapper.fromCustomer(null));
+
         assertEquals("Customer should not be null", exp.getMessage());
     }
 }
