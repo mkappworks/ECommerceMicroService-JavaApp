@@ -6,22 +6,19 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class CustomerService {
     private final CustomerRepository customerRepository;
-    private final CustomerMapper customerMapper;
 
-    public String createCustomer(CustomerRequest request) {
-        var customer = customerRepository.save(customerMapper.toCustomer(request));
-        return customer.getId();
+    public String createCustomer(Customer customer) {
+        var savedCustomer = customerRepository.save(customer);
+        return savedCustomer.getId();
     }
 
     public void updateCustomer(CustomerRequest request) {
-        var customer = customerRepository
-                .findById(request.id())
+        var customer = customerRepository.findById(request.id())
                 .orElseThrow(() -> new CustomerNotFoundException(String.format("Cannot update customer:: Customer with id '%s' not found", request.id())));
 
         mergerCustomer(customer, request);
@@ -43,11 +40,8 @@ public class CustomerService {
         }
     }
 
-    public List<CustomerResponse> getCustomers() {
-        return customerRepository.findAll()
-                .stream()
-                .map(customerMapper::fromCustomer)
-                .collect(Collectors.toList());
+    public List<Customer> getCustomers() {
+        return customerRepository.findAll();
     }
 
     public Boolean existById(String id) {
@@ -55,9 +49,8 @@ public class CustomerService {
                 .isPresent();
     }
 
-    public CustomerResponse findCustomerById(String id) {
+    public Customer findCustomerById(String id) {
         return customerRepository.findById(id)
-                .map(customerMapper::fromCustomer)
                 .orElseThrow(() -> new CustomerNotFoundException(String.format("Customer with id '%s' not found", id)));
     }
 
