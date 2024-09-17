@@ -1,9 +1,11 @@
 package com.mkappworks.ecommerce.customer;
 
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
 @Data
+@Builder
 @Validated
 public class Address {
     private String street;
