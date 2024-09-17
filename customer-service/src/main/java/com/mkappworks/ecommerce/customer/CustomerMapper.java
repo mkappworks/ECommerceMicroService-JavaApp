@@ -17,6 +17,10 @@ public class CustomerMapper {
     }
 
     public CustomerResponse fromCustomer(Customer customer) {
+        if (customer == null) {
+            throw new NullPointerException("Customer should not be null");
+        }
+
         return new CustomerResponse(
                 customer.getId(),
                 customer.getFirstName(),
