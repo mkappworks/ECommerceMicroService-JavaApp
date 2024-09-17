@@ -17,26 +17,26 @@ public class CustomerService {
         return savedCustomer.getId();
     }
 
-    public void updateCustomer(CustomerRequest request) {
-        var customer = customerRepository.findById(request.id())
-                .orElseThrow(() -> new CustomerNotFoundException(String.format("Cannot update customer:: Customer with id '%s' not found", request.id())));
+    public void updateCustomer(Customer requestCustomer) {
+        var dbCustomer = customerRepository.findById(requestCustomer.getId())
+                .orElseThrow(() -> new CustomerNotFoundException(String.format("Cannot update customer:: Customer with id '%s' not found", requestCustomer.getId())));
 
-        mergerCustomer(customer, request);
-        customerRepository.save(customer);
+        mergerCustomer(dbCustomer, requestCustomer);
+        customerRepository.save(dbCustomer);
     }
 
-    private void mergerCustomer(Customer customer, CustomerRequest request) {
-        if (StringUtils.isNotBlank(request.firstName())) {
-            customer.setFirstName(request.firstName());
+    private void mergerCustomer(Customer dbCustomer, Customer requestCustomer) {
+        if (StringUtils.isNotBlank(requestCustomer.getFirstName())) {
+            dbCustomer.setFirstName(requestCustomer.getFirstName());
         }
-        if (StringUtils.isNotBlank(request.lastName())) {
-            customer.setLastName(request.lastName());
+        if (StringUtils.isNotBlank(requestCustomer.getLastName())) {
+            dbCustomer.setLastName(requestCustomer.getLastName());
         }
-        if (StringUtils.isNotBlank(request.email())) {
-            customer.setEmail(request.email());
+        if (StringUtils.isNotBlank(requestCustomer.getEmail())) {
+            dbCustomer.setEmail(requestCustomer.getEmail());
         }
-        if (request.address() != null) {
-            customer.setAddress(request.address());
+        if (requestCustomer.getAddress() != null) {
+            dbCustomer.setAddress(requestCustomer.getAddress());
         }
     }
 
