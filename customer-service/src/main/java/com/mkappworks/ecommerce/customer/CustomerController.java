@@ -2,6 +2,7 @@ package com.mkappworks.ecommerce.customer;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class CustomerController {
     @PostMapping
     public ResponseEntity<String> createCustomer(@RequestBody @Valid CustomerRequest request) {
         var customer = customerMapper.toCustomer(request);
-        return ResponseEntity.ok(customerService.createCustomer(customer));
+        return new ResponseEntity<String>(customerService.createCustomer(customer), HttpStatus.CREATED);
     }
 
     @PutMapping
@@ -35,7 +36,7 @@ public class CustomerController {
                 .stream()
                 .map(customerMapper::fromCustomer)
                 .collect(Collectors.toList());
-        ;
+
         return ResponseEntity.ok(customerResponses);
     }
 
