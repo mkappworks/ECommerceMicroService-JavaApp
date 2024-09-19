@@ -1,6 +1,7 @@
 package com.mkappworks.ecommerce.customer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -32,24 +33,25 @@ public class CustomerControllerTests {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private final Address address = Address.builder()
-            .houseNumber("1")
-            .street("street")
-            .zipCode("123").
-            build();
-    private final Customer customerWithOutId = Customer.builder()
-            .firstName("John")
-            .lastName("Deer")
-            .email("john.deer@email.com")
-            .address(address)
-            .build();
-    private final Customer customerWithId = Customer.builder()
-            .id("1")
-            .firstName("John")
-            .lastName("Deer")
-            .email("john.deer@email.com")
-            .address(address)
-            .build();
+    private Address address;
+    private Customer customerWithId;
+
+    @BeforeEach
+    void setUp() {
+        address = Address.builder()
+                .houseNumber("1")
+                .street("street")
+                .zipCode("123").
+                build();
+
+        customerWithId = Customer.builder()
+                .id("1")
+                .firstName("John")
+                .lastName("Deer")
+                .email("john.deer@email.com")
+                .address(address)
+                .build();
+    }
 
     @Test
     void should_create_a_customer() throws Exception {
