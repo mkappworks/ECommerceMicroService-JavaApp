@@ -3,6 +3,7 @@ package com.mkappworks.ecommerce.handler;
 import com.mkappworks.ecommerce.exception.CustomerNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -24,7 +25,7 @@ class GlobalExceptionHandlerTest {
     }
 
     @Test
-    public void test_method_argument_not_valid_exception_handling() {
+    public void test_method_argument_not_valid_exception_handling() throws Exception {
         // Mock the BindingResult and FieldErrors
         var bindingResult = mock(BindingResult.class);
 
@@ -34,8 +35,13 @@ class GlobalExceptionHandlerTest {
         // Simulate the binding result with errors
         when(bindingResult.getAllErrors()).thenReturn(List.of(fieldError1, fieldError2));
 
-        // Create MethodArgumentNotValidException with the mocked BindingResult
-        MethodArgumentNotValidException exception = new MethodArgumentNotValidException(null, bindingResult);
+        // Create a MethodParameter using reflection on a dummy method
+        var method = this.getClass().getDeclaredMethod("dummyMethod");
+        var methodParameter = new MethodParameter(method, -1); // 0 is the index of the method parameter
+
+        // Create MethodArgumentNotValidException with the valid MethodParameter and the mocked BindingResult
+        var exception = new MethodArgumentNotValidException(methodParameter, bindingResult);
+
 
         // Call the handler
         var responseEntity = globalExceptionHandler.handle(exception);
@@ -62,12 +68,8 @@ class GlobalExceptionHandlerTest {
         assertEquals("error", responseEntity.getBody());
     }
 
-
+    // Dummy method for MethodParameter (Ensure this method exists in the same class)
+    private void dummyMethod() {
+        // This method is never called, it's just used for reflection
+    }
 }
-
-
-//@Test
-//public void test_method_argument_not_valid_exception_handling() {
-//    final var responseEntity = globalExceptionHandler.handle(new MethodArgumentNotValidException("f", ));
-//    assertEquals(409, responseEntity.getStatusCodeValue());
-//}
