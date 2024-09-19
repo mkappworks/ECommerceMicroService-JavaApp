@@ -1,6 +1,5 @@
-package com.mkappworks.ecommerce.cutomer;
+package com.mkappworks.ecommerce.customer;
 
-import com.mkappworks.ecommerce.customer.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
