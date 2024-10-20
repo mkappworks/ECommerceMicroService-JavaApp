@@ -1,4 +1,4 @@
-package com.mkappworks.ecommerce.orderline;
+package com.mkappworks.orderservice.orderline;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

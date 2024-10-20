@@ -1,8 +1,6 @@
-package com.mkappworks.ecommerce.order;
+package com.mkappworks.orderservice.order;
 
-import com.mkappworks.ecommerce.product.PurchaseRequest;
 import com.mkappworks.ecommerce.product.PurchaseResponse;
-import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

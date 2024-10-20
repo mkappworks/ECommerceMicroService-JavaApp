@@ -1,8 +1,8 @@
-package com.mkappworks.ecommerce.order;
+package com.mkappworks.orderservice.orderline;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, Integer> {
+public interface OrderLineRepository extends JpaRepository<OrderLine, Integer> {
 }

@@ -1,4 +1,4 @@
-package com.mkappworks.ecommerce.order;
+package com.mkappworks.orderservice.order;
 
 public enum PaymentMethod {
     PAYPAL,

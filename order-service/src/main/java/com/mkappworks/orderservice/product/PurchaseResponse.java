@@ -1,4 +1,4 @@
-package com.mkappworks.ecommerce.product;
+package com.mkappworks.orderservice.product;
 
 import java.math.BigDecimal;
 

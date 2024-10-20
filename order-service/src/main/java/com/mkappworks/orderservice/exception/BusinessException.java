@@ -1,4 +1,4 @@
-package com.mkappworks.ecommerce.exception;
+package com.mkappworks.orderservice.exception;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

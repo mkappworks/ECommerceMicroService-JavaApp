@@ -1,4 +1,4 @@
-package com.mkappworks.ecommerce.order;
+package com.mkappworks.orderservice.order;
 
 import com.mkappworks.ecommerce.product.PurchaseRequest;
 import jakarta.validation.constraints.NotBlank;

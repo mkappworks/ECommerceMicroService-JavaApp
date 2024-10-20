@@ -1,4 +1,4 @@
-package com.mkappworks.ecommerce.customer;
+package com.mkappworks.orderservice.customer;
 
 import com.mkappworks.ecommerce.exception.BusinessException;
 import lombok.RequiredArgsConstructor;

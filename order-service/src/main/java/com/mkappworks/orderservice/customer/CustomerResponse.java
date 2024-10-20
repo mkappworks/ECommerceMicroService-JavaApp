@@ -1,4 +1,4 @@
-package com.mkappworks.ecommerce.customer;
+package com.mkappworks.orderservice.customer;
 
 public record CustomerResponse(
         String id,

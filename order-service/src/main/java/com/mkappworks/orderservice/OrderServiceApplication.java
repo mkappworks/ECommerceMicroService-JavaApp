@@ -1,4 +1,4 @@
-package com.mkappworks.ecommerce;
+package com.mkappworks.orderservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

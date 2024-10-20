@@ -1,4 +1,4 @@
-package com.mkappworks.ecommerce.product;
+package com.mkappworks.orderservice.product;
 
 import com.mkappworks.ecommerce.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
@@ -7,7 +7,6 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 

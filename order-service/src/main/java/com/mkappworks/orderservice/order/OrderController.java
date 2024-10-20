@@ -1,4 +1,4 @@
-package com.mkappworks.ecommerce.order;
+package com.mkappworks.orderservice.order;
 
 import com.mkappworks.ecommerce.customer.CustomerService;
 import com.mkappworks.ecommerce.orderline.OrderLineMapper;

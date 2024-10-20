@@ -1,4 +1,4 @@
-package com.mkappworks.ecommerce.order;
+package com.mkappworks.orderservice.order;
 
 import com.mkappworks.ecommerce.orderline.OrderLine;
 import jakarta.persistence.*;
