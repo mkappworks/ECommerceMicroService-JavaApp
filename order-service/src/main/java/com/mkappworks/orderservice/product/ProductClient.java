@@ -1,6 +1,6 @@
 package com.mkappworks.orderservice.product;
 
-import com.mkappworks.ecommerce.exception.BusinessException;
+import com.mkappworks.orderservice.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
