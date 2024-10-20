@@ -20,4 +20,3 @@ application:
     customer-url: http://localhost:8222/api/v1/customer
     product-url: http://localhost:8222/api/v1/product
     payment-url: http://localhost:8222/api/v1/payment
-    
