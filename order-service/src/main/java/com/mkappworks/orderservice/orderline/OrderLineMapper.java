@@ -1,7 +1,7 @@
 package com.mkappworks.orderservice.orderline;
 
-import com.mkappworks.ecommerce.order.Order;
-import com.mkappworks.ecommerce.product.PurchaseResponse;
+import com.mkappworks.orderservice.order.Order;
+import com.mkappworks.orderservice.product.PurchaseResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

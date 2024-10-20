@@ -1,6 +1,6 @@
 package com.mkappworks.orderservice.order;
 
-import com.mkappworks.ecommerce.product.PurchaseRequest;
+import com.mkappworks.orderservice.product.PurchaseRequest;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

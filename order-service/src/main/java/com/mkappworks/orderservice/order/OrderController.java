@@ -1,9 +1,9 @@
 package com.mkappworks.orderservice.order;
 
-import com.mkappworks.ecommerce.customer.CustomerService;
-import com.mkappworks.ecommerce.orderline.OrderLineMapper;
-import com.mkappworks.ecommerce.orderline.OrderLineService;
-import com.mkappworks.ecommerce.product.ProductService;
+import com.mkappworks.orderservice.customer.CustomerService;
+import com.mkappworks.orderservice.orderline.OrderLineMapper;
+import com.mkappworks.orderservice.orderline.OrderLineService;
+import com.mkappworks.orderservice.product.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

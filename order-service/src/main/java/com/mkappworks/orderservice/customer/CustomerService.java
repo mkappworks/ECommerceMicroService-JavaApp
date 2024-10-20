@@ -1,6 +1,6 @@
 package com.mkappworks.orderservice.customer;
 
-import com.mkappworks.ecommerce.exception.BusinessException;
+import com.mkappworks.orderservice.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
