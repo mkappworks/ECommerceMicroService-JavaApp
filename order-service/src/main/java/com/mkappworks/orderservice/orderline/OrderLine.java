@@ -1,6 +1,6 @@
 package com.mkappworks.orderservice.orderline;
 
-import com.mkappworks.ecommerce.order.Order;
+import com.mkappworks.orderservice.order.Order;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
