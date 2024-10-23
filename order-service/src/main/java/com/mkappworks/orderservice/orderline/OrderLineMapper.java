@@ -27,7 +27,7 @@ public class OrderLineMapper {
                 .collect(Collectors.toList());
     }
 
-    private OrderLineRequest toOrderLineRequest(PurchaseResponse product, Order order) {
+    private OrderLineRequest toOrderLineRequest(Order order, PurchaseResponse product) {
         return OrderLineRequest.builder()
                 .id(null)
                 .productId(product.productId())
@@ -36,10 +36,10 @@ public class OrderLineMapper {
                 .build();
     }
 
-    public List<OrderLineRequest> toOrderLineRequests(List<PurchaseResponse> products, Order order) {
+    public List<OrderLineRequest> toOrderLineRequests(Order order, List<PurchaseResponse> products) {
         return products
                 .stream()
-                .map((product) -> toOrderLineRequest(product, order))
+                .map((product) -> toOrderLineRequest(order, product))
                 .collect(Collectors.toList());
     }
 }
