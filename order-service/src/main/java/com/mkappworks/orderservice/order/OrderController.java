@@ -47,4 +47,16 @@ public class OrderController {
 
         return ResponseEntity.ok(order.getId());
     }
+
+    @GetMapping
+    public ResponseEntity<List<OrderResponse>> findAllOrders() {
+        var orders = orderService.findAllOrders();
+        return ResponseEntity.ok(orderMapper.fromOrders(orders));
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<OrderResponse> findOrderById(@PathVariable Integer id) {
+        var order = orderService.findOrderById(id);
+        return ResponseEntity.ok(orderMapper.fromOrder(order));
+    }
 }
