@@ -14,4 +14,8 @@ public class OrderLineService {
     public void saveOrderLines(List<OrderLine> orderLines) {
         orderLineRepository.saveAll(orderLines);
     }
+
+    public List<OrderLine> findAllByOrderId(Integer orderId) {
+        return orderLineRepository.findAllByOrderId(orderId);
+    }
 }

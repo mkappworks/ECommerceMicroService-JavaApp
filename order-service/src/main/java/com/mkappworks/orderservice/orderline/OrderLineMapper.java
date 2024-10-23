@@ -42,4 +42,15 @@ public class OrderLineMapper {
                 .map((product) -> toOrderLineRequest(order, product))
                 .collect(Collectors.toList());
     }
+
+    private OrderLineResponse fromOrderLine(OrderLine orderLine) {
+        return new OrderLineResponse(orderLine.getId(), orderLine.getQuantity());
+    }
+
+    public List<OrderLineResponse> fromOrderLines(List<OrderLine> orderLines) {
+        return orderLines
+                .stream()
+                .map(this::fromOrderLine)
+                .collect(Collectors.toList());
+    }
 }
