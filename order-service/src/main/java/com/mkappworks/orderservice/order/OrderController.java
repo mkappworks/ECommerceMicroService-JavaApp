@@ -1,16 +1,16 @@
 package com.mkappworks.orderservice.order;
 
 import com.mkappworks.orderservice.customer.CustomerService;
+import com.mkappworks.orderservice.kafka.OrderProducer;
 import com.mkappworks.orderservice.orderline.OrderLineMapper;
 import com.mkappworks.orderservice.orderline.OrderLineService;
 import com.mkappworks.orderservice.product.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -23,23 +23,28 @@ public class OrderController {
     private final ProductService productService;
     private final OrderLineService orderLineService;
     private final OrderLineMapper orderLineMapper;
+    private final OrderProducer orderProducer;
 
     @PostMapping
     public ResponseEntity<Integer> createOrder(@RequestBody @Valid OrderRequest orderRequest) {
+        // check the customer -> customer-ms using OpenFeign
         var customer = customerService.findCustomerById(orderRequest.customerId());
 
-        var products = productService.getProducts(orderRequest.products());
+        //purchase the products -> product-ms using RestTemplate
+        var purchasedProducts = productService.getProducts(orderRequest.products());
 
-        var order = orderService.createOrder(orderMapper.toOrder(orderRequest, products));
+        var order = orderService.createOrder(orderMapper.toOrder(orderRequest));
 
-        var orderLineRequests = orderLineMapper.toOrderLineRequests(products, order);
+        var orderLineRequests = orderLineMapper.toOrderLineRequests(order, purchasedProducts);
         var orderLines = orderLineMapper.toOrderLines(orderLineRequests);
         orderLineService.saveOrderLines(orderLines);
 
         //start payment process
 
         //send the order confirmation -> notification-ms (kafka)
+        var orderConfirmation = orderMapper.toOrderConfirmation(order, customer, purchasedProducts);
+        orderProducer.sendOrderConfirmation(orderConfirmation);
 
-        return ResponseEntity.ok(1);
+        return ResponseEntity.ok(order.getId());
     }
 }
