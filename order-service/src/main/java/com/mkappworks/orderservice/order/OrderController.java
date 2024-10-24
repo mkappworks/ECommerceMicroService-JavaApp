@@ -4,6 +4,8 @@ import com.mkappworks.orderservice.customer.CustomerService;
 import com.mkappworks.orderservice.kafka.OrderProducer;
 import com.mkappworks.orderservice.orderline.OrderLineMapper;
 import com.mkappworks.orderservice.orderline.OrderLineService;
+import com.mkappworks.orderservice.payment.PaymentClient;
+import com.mkappworks.orderservice.payment.PaymentRequest;
 import com.mkappworks.orderservice.product.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +21,16 @@ public class OrderController {
 
     private final OrderService orderService;
     private final OrderMapper orderMapper;
+
     private final CustomerService customerService;
+
     private final ProductService productService;
+
     private final OrderLineService orderLineService;
     private final OrderLineMapper orderLineMapper;
+
+    private final PaymentClient paymentClient;
+
     private final OrderProducer orderProducer;
 
     @PostMapping
@@ -40,6 +48,15 @@ public class OrderController {
         orderLineService.saveOrderLines(orderLines);
 
         //start payment process
+        paymentClient.createPayment(
+                PaymentRequest.builder()
+                        .orderId(order.getId())
+                        .orderReference(order.getReference())
+                        .amount(order.getTotalAmount())
+                        .paymentMethod(order.getPaymentMethod())
+                        .customer(customer)
+                        .build()
+        );
 
         //send the order confirmation -> notification-ms (kafka)
         var orderConfirmation = orderMapper.toOrderConfirmation(order, customer, purchasedProducts);
