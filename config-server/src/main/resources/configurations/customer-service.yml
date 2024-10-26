@@ -6,6 +6,6 @@ spring:
       host: localhost
       port: 27017
       authentication-database: admin
-      database: customer
+      database: customerdb
 server:
   port: 8090
